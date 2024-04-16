@@ -16,17 +16,11 @@ describe('set order as paid', () => {
   } as unknown as OrderRepositoryInterface;
 
   it('should update an order to paid status and update paidAt', async () => {
-    const setShippingAddressServiceMock = new SetOrderShippingAddressService(
-      orderRepositoryMock,
-    );
-    const PaidOrderServiceMock = new PaidOrderService(orderRepositoryMock);
+    const paidOrderService = new PaidOrderService(orderRepositoryMock);
 
-    await setShippingAddressServiceMock.setOrderShippingAddress({
-      orderId: '123',
-      shippingAddress: '123 Main St',
-    });
+    order.setShippingAddress('123 Main St.');
 
-    const updatedOrder = await PaidOrderServiceMock.paidOrder('123');
+    const updatedOrder = await paidOrderService.paidOrder('123');
 
     console.log(updatedOrder);
 
