@@ -1,4 +1,5 @@
-import { OrderItem } from 'src/order/domain/entity/order-item.entity';
+import { OrderStatus } from 'aws-sdk/clients/outposts';
+import { OrderItem } from '../../../order/domain/entity/order-item.entity';
 import {
   Column,
   CreateDateColumn,
@@ -48,7 +49,7 @@ export class Order {
     type: 'enum',
     enum: ['CART', 'SHIPPING_ADRESS_SET', 'PAID'],
   })
-  status: 'CART' | 'SHIPPING_ADRESS_SET' | 'PAID';
+  status: OrderStatus;
 
   @CreateDateColumn({ type: 'timestamp', nullable: true })
   paidAt: Date | null;
@@ -74,5 +75,13 @@ export class Order {
     this.shippingAddress = shippingAddress;
     this.status = 'SHIPPING_ADRESS_SET';
     this.shippingAddressSetAt = new Date();
+  }
+
+  paid(): void {
+    if (this.status !== 'SHIPPING_ADRESS_SET') {
+      throw new Error('Shipping address is required');
+    }
+    this.status = 'PAID';
+    this.paidAt = new Date();
   }
 }

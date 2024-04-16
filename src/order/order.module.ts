@@ -1,16 +1,17 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { OrderRepositoryInterface } from 'src/order/domain/port/order.repository.interface';
-import { CreateOrderService } from 'src/order/domain/use-case/create-order.service.service';
-import OrderRepository from 'src/order/infrastructure/order.repository';
 import { GetOrdersByCustomerService } from './domain/use-case/get-orders-by-customer.service';
 import { GetOrdersService } from './domain/use-case/get-orders.service';
 import { RemoveOrderService } from './domain/use-case/remove-order.service';
 import { SetOrderShippingAddressService } from './domain/use-case/set-order-shipping-method.service';
 import { PaidOrderService } from './domain/use-case/paid-order.service';
-import { OrderController } from './order.controller';
+import { OrderController } from './presentation/order.controller';
+import OrderRepository from './infrastructure/order.repository';
+import { CreateOrderService } from './domain/use-case/create-order.service';
+import { OrderItem } from './domain/entity/order-item.entity';
 @Module({
-  imports: [TypeOrmModule.forFeature([])],
+  imports: [TypeOrmModule.forFeature([OrderItem])],
   controllers: [OrderController],
   providers: [
     {
@@ -61,4 +62,4 @@ import { OrderController } from './order.controller';
     },
   ],
 })
-export class ArticleModule {}
+export class OrderModule {}

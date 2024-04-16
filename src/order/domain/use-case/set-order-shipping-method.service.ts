@@ -1,6 +1,6 @@
 import { Order } from '../entity/order.entity';
 import { SetOrderShippingAddressDto } from '../dto/set-order-shipping-Address.dto';
-import { OrderRepositoryInterface } from 'src/order/domain/port/order.repository.interface';
+import { OrderRepositoryInterface } from '../../../order/domain/port/order.repository.interface';
 
 export class SetOrderShippingAddressService {
   constructor(private orderRepository: OrderRepositoryInterface) {}

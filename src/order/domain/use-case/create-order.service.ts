@@ -1,7 +1,7 @@
-import { CreateOrderDto } from 'src/order/domain/dto/create-order.dto';
-import { OrderItem } from 'src/order/domain/entity/order-item.entity';
-import { Order } from 'src/order/domain/entity/order.entity';
-import { OrderRepositoryInterface } from 'src/order/domain/port/order.repository.interface';
+import { CreateOrderDto } from '../dto/create-order.dto';
+import { OrderItem } from '../entity/order-item.entity';
+import { Order } from '../../domain/entity/order.entity';
+import { OrderRepositoryInterface } from '../../domain/port/order.repository.interface';
 
 export class CreateOrderService {
   constructor(private readonly orderRepository: OrderRepositoryInterface) {}

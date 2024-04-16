@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { AppModule } from './../src/app.module';
+import { AppModule } from '../../src/app.module';
 
-describe('AppController (e2e)', () => {
+describe('Get Order (e2e)', () => {
   let app: INestApplication;
 
   beforeEach(async () => {
@@ -15,7 +15,10 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/orders (GET)', () => {
-    return request(app.getHttpServer()).get('/orders').expect(200);
+  it('should return orders', async () => {
+    const response = await request(app.getHttpServer()).get('/orders');
+
+    expect(response.status).toStrictEqual(200);
+    expect(response.body).toStrictEqual([]);
   });
 });

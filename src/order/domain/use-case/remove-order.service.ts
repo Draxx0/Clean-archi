@@ -1,4 +1,4 @@
-import { OrderRepositoryInterface } from 'src/order/domain/port/order.repository.interface';
+import { OrderRepositoryInterface } from '../../../order/domain/port/order.repository.interface';
 
 export class RemoveOrderService {
   constructor(private orderRepository: OrderRepositoryInterface) {}
