@@ -1,7 +1,6 @@
 import { Order } from '../entity/order.entity';
 import { OrderRepositoryInterface } from '../port/order.repository.interface';
 import { PaidOrderService } from './paid-order.service';
-import { SetOrderShippingAddressService } from './set-order-shipping-method.service';
 
 describe('set order as paid', () => {
   const order = new Order('John Doe', []);
@@ -21,8 +20,6 @@ describe('set order as paid', () => {
     order.setShippingAddress('123 Main St.');
 
     const updatedOrder = await paidOrderService.paidOrder('123');
-
-    console.log(updatedOrder);
 
     expect(updatedOrder.status).toBe('PAID');
     expect(updatedOrder.paidAt).toBeInstanceOf(Date);
