@@ -60,4 +60,19 @@ describe('set order shipping address', () => {
       );
     }
   });
+
+  it('should throw an error if no order was found', async () => {
+    const setOrderShippingAddressService = new SetOrderShippingAddressService(
+      orderRepositoryMock,
+    );
+
+    try {
+      await setOrderShippingAddressService.setOrderShippingAddress({
+        orderId: '',
+        shippingAddress: '123 rue de la Paix',
+      });
+    } catch (err) {
+      expect(err.message).toEqual('Order not found');
+    }
+  });
 });
