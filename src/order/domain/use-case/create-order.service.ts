@@ -16,7 +16,11 @@ export class CreateOrderService {
         ),
     );
 
+    console.log('orderItems', orderItems);
+
     const order = new Order(createOrderDto.customerName, orderItems);
+
+    console.log('order', order);
 
     order.price = order.getOrderTotalPrice();
 

@@ -10,6 +10,7 @@ import { OrderController } from './presentation/order.controller';
 import OrderRepository from './infrastructure/order.repository';
 import { CreateOrderService } from './domain/use-case/create-order.service';
 import { OrderItem } from './domain/entity/order-item.entity';
+import { AddOrderItemService } from './domain/use-case/add-order-item.service';
 @Module({
   imports: [TypeOrmModule.forFeature([OrderItem])],
   controllers: [OrderController],
@@ -57,6 +58,13 @@ import { OrderItem } from './domain/entity/order-item.entity';
       provide: PaidOrderService,
       useFactory: (orderRepository: OrderRepositoryInterface) => {
         return new PaidOrderService(orderRepository);
+      },
+      inject: ['OrderRepositoryInterface'],
+    },
+    {
+      provide: AddOrderItemService,
+      useFactory: (orderRepository: OrderRepositoryInterface) => {
+        return new AddOrderItemService(orderRepository);
       },
       inject: ['OrderRepositoryInterface'],
     },

@@ -34,6 +34,7 @@ export class Order {
 
   @OneToMany(() => OrderItem, (orderItem) => orderItem.order, {
     nullable: true,
+    cascade: true,
   })
   orderItems: OrderItem[];
 
@@ -83,5 +84,20 @@ export class Order {
     }
     this.status = 'PAID';
     this.paidAt = new Date();
+  }
+
+  addOrderItems(orderItems: OrderItem[]): void {
+    orderItems.forEach((orderItem) => {
+      const existingOrderItem = this.orderItems.find(
+        (item) => item.productName === orderItem.productName,
+      );
+
+      if (existingOrderItem) {
+        existingOrderItem.quantity += orderItem.quantity;
+        return;
+      }
+
+      this.orderItems.push(orderItem);
+    });
   }
 }
